@@ -1,5 +1,5 @@
-##ALGORITHM ASSIGNMENT ONE (SORTING ALGORITHMS)
-how to run it:
-	make
-	./main
-
+**ALGORITHM ASSIGNMENT**
+**how to run:**
+        cd Algorithm_assignment/
+        make
+        ./main
