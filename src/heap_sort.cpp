@@ -1,3 +1,8 @@
+/****************************************************************/
+/* Author : Daniel Fekadu					*/
+/* Date : 27/12/2016						*/
+/***************************************************************/
+
 #include"../include/sort.h"
 #include<stdio.h>
 void heap_sort::sort(int* A,int length) {

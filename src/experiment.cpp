@@ -1,3 +1,8 @@
+/****************************************************************/
+/* Author : Daniel Fekadu					*/
+/* Date : 27/12/2016						*/
+/***************************************************************/
+
 #include "../include/experiment.h"
 #include "../include/generate_array.h"
 #include "../include/sort.h"
@@ -15,20 +20,26 @@ merge_sort     merge;
 quick_sort     quick;
 heap_sort      heap_s;
 
-Sort * algorithms[] = {&selection,&insertion,&merge,&quick,&heap_s};
+Sort * algorithms[] = {&quick,&merge,&heap_s,&insertion,&selection};
 
-time_t start_t,stop_t;
+clock_t start_t,stop_t;
 
 std::ofstream my_file;
-std::string path = "./report/log/presortedness_";
+std::string path = "./report/test/presortedness_";
 std::string format = ".csv";
 
+/*************************************************************************
+
+
+
+
+*/
 void experiment(int start ,int stop,int step,float presortedness,int rep){
 	std::ostringstream ss;
 	ss << presortedness;
 	std::string s(ss.str());
     	
-	my_file.open(path+s+format);
+	my_file.open(path+s+format);//dump csv
 	int num_exp = step+1;//number of experiments;
 	int running_time_log [rep][num_exp][5];//running time of each algorithm in each experiment
 	int size;
@@ -39,14 +50,15 @@ void experiment(int start ,int stop,int step,float presortedness,int rep){
 			
 			size = ((stop-start)/step)*i;
 			int *A ;
-			A = generate_array(size,presortedness);
+			
+			A = generate_array(size,presortedness);//generate presorted array
 			
 			printf("sorting rep:=%i %i\n",k,size);
 
 			for (int j = 0;j<5;j++){//for every algorithm
 			
 			 int* B=malloc (sizeof(int) * size);
-			 
+			 //printf("%i\n",j);
 			 copy(A,B,size);
 			 start_t = clock();		
 			 algorithms[j]->sort(B,size);
@@ -60,10 +72,10 @@ void experiment(int start ,int stop,int step,float presortedness,int rep){
 	    }
 	}
 	
-	printf("start:= %i\t stop:=%i\t step:=%i\t presortedness:=%0.6f\n",start,stop,step,presortedness);
+	printf("start:= %i\t stop:=%i\t step:=%i\t presortedness:=%0.3f\n",start,stop,step,presortedness);
 	
-	printf("size  \tselection\tinsertion\tmergesort\tquicksort\theapsort\n");
-	my_file<<"size , selection , insertion , mergesort , quicksort , heapsort\n";
+	printf("n    \tquicksort\tmergesort\theapsort\tinsertion\tselection\n");
+	my_file<<"n  , quick sort , merge sort , heap sort , insertion sort , selection sort\n";
 	int average_running_time[num_exp][5];
 	int result[num_exp][6];
 
@@ -77,7 +89,7 @@ void experiment(int start ,int stop,int step,float presortedness,int rep){
 
 				 	 acc+=running_time_log[k][i][j];
 					 av_rt = acc/rep;
-					 average_running_time[i][j] = av_rt;
+					 average_running_time[i][j] = av_rt;//average of the repetitions
 					
 			}
 
@@ -113,7 +125,7 @@ void experiment(int start ,int stop,int step,float presortedness,int rep){
 			my_file.close();
 	
 }
-void copy(int *A,int* B,int length){
+inline void copy(int *A,int* B,int length){
 
 
 	for(int i=0;i<length;i++)B[i]=A[i];

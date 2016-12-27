@@ -1,3 +1,8 @@
+/****************************************************************/
+/* Author : Daniel Fekadu					*/
+/* Date : 27/12/2016						*/
+/***************************************************************/
+
 #ifndef _SORT_H
 #define _SORT_H
 
@@ -9,7 +14,7 @@ typedef struct {
     int *nodes;
     int length;
     int heap_size;
-} heap;
+} heap;//HEAP NODE STRUCT
 
 class Sort
 {
