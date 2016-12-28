@@ -84,7 +84,7 @@ void experiment(int start ,int stop,int step,float presortedness,int rep){
 
 			size = ((stop-start)/step)*i;	
 			for (int j = 0;j<5;j++){//for every algorithm
-				int acc =0,av_rt=0;
+				double acc =0,av_rt=0;
 				for (int k = 0;k<rep;k++){
 
 				 	 acc+=running_time_log[k][i][j];

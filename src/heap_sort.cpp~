@@ -5,7 +5,6 @@
 
 #include"../include/sort.h"
 #include<stdio.h>
-
 void heap_sort::sort(int* A,int length) {
 		heap new_heap;
 		new_heap = heap_sort::build_max_heap(A,length);
